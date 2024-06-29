@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Proyecto_Final_Car_Wash</string>
+    <string name="escribaSuEmail">Escriba su correo</string>
+    <string name="ingreseSuPassword">Escriba su contraseña</string>
+    <string name="inciarSesion">Iniciar Sesion</string>
+    <string name="notRegistered">No tengo una cuenta.</string>
+    <string name="forgotPassword">Olvide mi contraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="escribaSuApellido">Escriba su Apellido</string>
+    <string name="escribaSuNombre">Escriba su nombre</string>
+    <string name="escribaSuTelefono">Escriba su telefono</string>
+    <string name="miPerfil">Mi Perfil</string>
+    <string name="cerrarSesion">Cerrar Sesion</string>
+    <string name="mandarMensajeAlCorreo">Mandar mensaje de recuperacion</string>
+    <string name="forgotPasswordTitle">Olvide Mi Contraseña</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seguridadTitleTextView">Seguridad</string>
+    <string name="ingreseSuPasswordNuevo">Ingrese su contraseña actual</string>
+    <string name="ingreseSuPasswordActual">Ingrese su nueva contraseña</string>
+    <string name="cambiarPasswordTitle">Cambiar contraseña</string>
+    <string name="eliminarCuentaTitle">Eliminar cuenta</string>
 </resources>
