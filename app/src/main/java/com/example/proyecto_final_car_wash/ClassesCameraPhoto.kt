@@ -41,7 +41,7 @@ class ClassesCameraPhoto(private val context: Context) {
             // Continue only if the File was successfully created
             photoFile?.also {
                 photoURI = FileProvider.getUriForFile(
-                    context, "com.example.codigo_en_clase.fileprovider", it
+                    context, "com.example.proyecto_final_car_wash.fileprovider", it
                 )
                 takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoURI)
                 return takePictureIntent

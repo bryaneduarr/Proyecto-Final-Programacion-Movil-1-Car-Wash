@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/escribaSuTelefono"
-            android:inputType="textEmailAddress" />
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -52,14 +52,15 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correoLayout">
+        app:layout_constraintTop_toBottomOf="@+id/correoLayout"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ingreseSuPassword"
-            android:inputType="textEmailAddress" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/escribaSuNombre"
-            android:inputType="textEmailAddress" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/escribaSuApellido"
-            android:inputType="textEmailAddress" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

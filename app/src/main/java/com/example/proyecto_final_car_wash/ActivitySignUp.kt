@@ -38,8 +38,8 @@ class ActivitySignUp : AppCompatActivity() {
     // photo.
     private lateinit var classesCameraPhoto: ClassesCameraPhoto;
 
-    // Declarar la variable para traer la clase de la storage.
-    private lateinit var classesStorage: ClassesStorage;
+    // Declarar la variable para traer la clase del storage.
+    private lateinit var classesStoragePhotos: ClassesStoragePhotos;
 
     // Declarar como vamos a tomar la foto utilizando
     // registerForActivityResult.
@@ -65,34 +65,10 @@ class ActivitySignUp : AppCompatActivity() {
                     // cuando tengamos la decodificacion y el proceso
                     // anterior realizado.
                     imageViewSelection.setImageBitmap(bitmap);
-                }
-            }
-        }
 
-    // Declarar como vamos a ingresar al almacenamiento
-    // utilizando el registerForActivityResult.
-    private val seleccionarFoto =
-    // Con registerForActivityResult() podemos manejar resultados
-    // de imagenes.
-    // Para el resultado se ejecuta cuando completamos
-        // la actividad del metodo anterior.
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultado ->
-            // Validamos el resultado si es verdadero o falso.
-            if (resultado.resultCode == Activity.RESULT_OK) {
-                // Declaramos la variable de la foto con el Uri.
-                val imageUri = resultado.data?.data;
-
-                // Obtenemos dentro del contexto del objeto
-                // imageUri.
-                imageUri?.let {
-                    // Declaramos una variable para obtener el
-                    // bitmap.
-                    val bitmap = classesStorage.getBitmapFromUri(it);
-
-                    // Aqui establecemos donde se pondra la imagen
-                    // cuando tengamos la decodificacion y el proceso
-                    // anterior realizado.
-                    imageViewSelection.setImageBitmap(bitmap);
+                    // Le decimos que usaremos la imagen que tomamos
+                    // en el classesStoragePhotos y seria como el contexto.
+                    classesStoragePhotos.imageUri = it;
                 }
             }
         }
@@ -114,12 +90,6 @@ class ActivitySignUp : AppCompatActivity() {
         auth = FirebaseAuth.getInstance();
         fireStore = FirebaseFirestore.getInstance();
 
-        // Inicializar la clase ClassesCameraPhoto.kt.
-        classesCameraPhoto = ClassesCameraPhoto(this);
-
-        // Inicializar la clase ClassesStorage.kt.
-        classesStorage = ClassesStorage(this);
-
         // Obtenemos el id de la foto
         imageViewSelection = findViewById(R.id.imageViewSelection);
 
@@ -133,8 +103,13 @@ class ActivitySignUp : AppCompatActivity() {
         // Obtener el valor del boton registrar.
         registerButton = findViewById(R.id.registerButton);
 
-        // Manejamos el click del image view.
+        // Inicializar la clase ClassesCameraPhoto.kt.
+        classesCameraPhoto = ClassesCameraPhoto(this);
 
+        // Inicializar la clase ClassesStoragePhotos.kt
+        classesStoragePhotos = ClassesStoragePhotos(this, imageViewSelection);
+
+        // Manejamos el click del image view.
         imageViewSelection.setOnClickListener {
             mostrarModalOpciones();
         }
@@ -151,8 +126,19 @@ class ActivitySignUp : AppCompatActivity() {
 
             // Validar que los campos nos esten vacios.
             if (validateFields(nombre, apellido, telefono, correo, password)) {
-                // Llevar los datos a firebase auth y firebase store.
-                registerUser(nombre, apellido, telefono, correo, password)
+                // Decimos que tambien queremos subir la imagen.
+                classesStoragePhotos.subirImageFirebaseStorage(onSuccess = { imageUrl ->
+                    // Llevar los datos a firebase auth y firebase store.
+                    // Tambien decimos que si la imagen se pudo registrar
+                    // la registramos.
+                    registerUser(nombre, apellido, telefono, correo, password, imageUrl);
+                }, onFailure = { exception ->
+                    // Si hubiera algun error con la imagen entonces nos
+                    // mostraria este toast.
+                    Toast.makeText(
+                        this, "Error al subir la imagen: ${exception.message}", Toast.LENGTH_SHORT
+                    ).show()
+                })
             }
         }
     }
@@ -187,17 +173,9 @@ class ActivitySignUp : AppCompatActivity() {
 
         // Opcion para tomar imagen del almacenamiento.
         seleccionarFotoTextView.setOnClickListener {
-            // Revisamos si el usuario permitio usar
-            // el almacenamiento externo.
-            if (classesStorage.checkStoragePermission(this)) {
-                // Declaramos la variable para traer la funcion
-                // dispatch de la clase camera foto.
-                val selectImageIntent = classesStorage.createSelectImageIntent();
-
-                // Aqui ejecutando el tomarFoto podremos
-                // iniciar y tomar la foto.
-                seleccionarFoto.launch(selectImageIntent);
-            }
+            // Solicitar permisos antes de abrir el selector
+            // de imagenes.
+            classesStoragePhotos.requestPermissions();
 
             // Lo que haremos despues de darle click.
             dialog.dismiss();
@@ -231,21 +209,6 @@ class ActivitySignUp : AppCompatActivity() {
             // mostramos un toast de error.
             Toast.makeText(this, "Acceso Denegado!", Toast.LENGTH_LONG).show();
         });
-
-        // Llamamos la funcion que declaramos en el archivo
-        // ClassesStorage y le pasamos los parametros
-        // necesarios.
-        classesStorage.onRequestPermissionsResult(requestCode, grantResults, {
-            // Declaramos la variable para traer la funcion
-            // createSelectImageIntent de la ClassesStorage.
-            val selectImageIntent = classesStorage.createSelectImageIntent();
-
-            seleccionarFoto.launch(selectImageIntent);
-        }, {
-            // Si hubo un acceso denegado en los permisos
-            // mostramos un toast de error.
-            Toast.makeText(this, "Acceso Denegado!", Toast.LENGTH_LONG).show();
-        });
     }
 
     // Validar que los campos esten llenos.
@@ -267,7 +230,12 @@ class ActivitySignUp : AppCompatActivity() {
 
     // Funcion para registrar los usuarios.
     private fun registerUser(
-        nombre: String, apellido: String, telefono: String, correo: String, password: String
+        nombre: String,
+        apellido: String,
+        telefono: String,
+        correo: String,
+        password: String,
+        imageUrl: String
     ) {
         // Guardar el correo y contraseña en
         // firbase auth.
@@ -285,7 +253,8 @@ class ActivitySignUp : AppCompatActivity() {
                     "apellido" to apellido,
                     "telefono" to telefono,
                     "correo" to correo,
-                )
+                    "imageUrl" to imageUrl,
+                );
 
                 // Si el usuario existe entonces continuamos.
                 if (userId != null) {
