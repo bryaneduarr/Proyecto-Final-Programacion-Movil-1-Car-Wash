@@ -37,26 +37,46 @@ class ActivitySignIn : AppCompatActivity() {
         auth = Firebase.auth;
 
         binding.signInButton.setOnClickListener {
+            // Validamos los camopos.
             if (validateField()) {
+                // Declaramos las variables para correo y contraseña.
                 val email = binding.emailEditText.text.toString();
                 val password = binding.passwordEditText.text.toString();
 
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        // Mensaje de Inicio de sesion correcto.
-                        Toast.makeText(this, "Inicio de sesion correcto!", Toast.LENGTH_SHORT)
-                            .show();
+                        // Declaramos una variable para saber el usuario actual.
+                        val usuario = auth.currentUser;
 
-                        // Llevar al MainActivity.
-                        val intent = Intent(this, MainActivity::class.java);
-                        startActivity(intent);
+                        // Verificamos que el usuario no sea nulo.
+                        if (usuario !== null) {
+                            // Declaramos una variable para saber si el usuario esta validado.
+                            val verificacion = usuario.isEmailVerified;
 
-                        // Finalizar el ActivitySignIn
-                        finish();
+                            // Verificamos si el usuario valido su correo.
+                            if (verificacion) {
+                                // Mensaje de Inicio de sesion correcto.
+                                Toast.makeText(
+                                    this, "Inicio de sesion correcto!", Toast.LENGTH_SHORT
+                                ).show();
+
+                                // Llevar al MainActivity.
+                                val intent = Intent(this, MainActivity::class.java);
+                                startActivity(intent);
+
+                                // Finalizar el ActivitySignIn
+                                finish();
+                            } else {
+                                // Mostar un mensaje de error si al iniciar sesion paso un error.
+                                Toast.makeText(
+                                    this, "Porfavor verifique su correo.", Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                        }
                     } else {
                         // Si hubo algun error entonces mostrar
                         // un mensaje toast.
-                        Toast.makeText(this, "Inicio de sesion incorrecto.", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "Hubo algo mal al iniciar sesion.", Toast.LENGTH_SHORT)
                             .show();
                     }
                 }
@@ -136,13 +156,19 @@ class ActivitySignIn : AppCompatActivity() {
     override fun onStart() {
         super.onStart();
 
+        // Declaramos una variable para el usuario actual.
+        val usuario = auth.currentUser;
+
         // Revisamos si el usuario estaba
         // registrado.
-        if (auth.currentUser != null) {
-            // Si esta registrado entonces llevarlo al
-            // MainActivity.kt.
-            val intent = Intent(this, MainActivity::class.java);
-            startActivity(intent);
+        if (usuario != null) {
+            // Verificamos si el usuario esta verificado.
+            if (usuario.isEmailVerified) {
+                // Si esta registrado entonces llevarlo al
+                // MainActivity.kt.
+                val intent = Intent(this, MainActivity::class.java);
+                startActivity(intent);
+            }
         }
     }
 }

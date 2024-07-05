@@ -25,8 +25,9 @@ class FragmentSeguridad : Fragment() {
     private var binding_: FragmentSeguridadBinding? = null;
     private val binding get() = binding_!!;
 
-    // Declarar variable de firebaseauth.
+    // Declarar variables de firebase.
     private lateinit var auth: FirebaseAuth;
+    private lateinit var db: FirebaseFirestore;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,6 +45,7 @@ class FragmentSeguridad : Fragment() {
         super.onViewCreated(view, savedInstanceState);
         // Incializar firebase.
         auth = Firebase.auth;
+        db = FirebaseFirestore.getInstance();
 
         // Cuando demos click al boton
         // regresar hara lo siguiente.
@@ -52,6 +54,11 @@ class FragmentSeguridad : Fragment() {
             // por cuestiones de seguridad.
             val intent = Intent(requireContext(), ActivitySignIn::class.java);
             startActivity(intent);
+        }
+
+        // Manejamos el click para cambiar de correo.
+        binding.cambiarCorreoButton.setOnClickListener {
+            cambiarCorreo();
         }
 
         // Manejamos cuando el usuario quiera borrar
@@ -104,12 +111,21 @@ class FragmentSeguridad : Fragment() {
                                                         Toast.LENGTH_LONG
                                                     ).show();
 
-                                                    // Llevamos al usuario al
-                                                    // ActivitySignIn.
+                                                    auth.signOut();
+
+                                                    // Y nos vamos al ActivitySignIn.
                                                     val intent = Intent(
                                                         requireContext(), ActivitySignIn::class.java
                                                     );
                                                     startActivity(intent);
+
+                                                    // Mostrar mensaje para volver a iniciar
+                                                    // sesion
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Porfavor vuevla a iniciar sesion.",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show();
                                                 } else {
                                                     // Si salio mal entonces mostramos un
                                                     // mensaje de error.
@@ -236,8 +252,117 @@ class FragmentSeguridad : Fragment() {
         }
     }
 
-    private fun revisarCamposVacios(): Boolean {
+    private fun cambiarCorreo() {
+        // Crear una variable para almacenar el usuario actual.
+        val usuario = auth.currentUser;
 
+        // Obtener el campo del nuevo correo en forma de
+        // string.
+        val newEmail = binding.correoEditText.text.toString();
+
+        // Obtener el cambo para confirmar la contraseña actual
+        // (del correo).
+        val confirmarPassword = binding.currentPasswordCorreoEditText.text.toString();
+
+        // Manejar los campos vacios.
+        if (newEmail.isEmpty() || confirmarPassword.isEmpty()) {
+            // Mensaje si alguno de los campos estan vacios.
+            Toast.makeText(
+                requireContext(), "Por favor, llena todos los campos.", Toast.LENGTH_SHORT
+            ).show();
+
+            // Retornamos para no continuar.
+            return;
+        }
+
+        // Crea las credenciales para volver a autenticar.
+        val credential = EmailAuthProvider.getCredential(usuario?.email!!, confirmarPassword)
+
+        // Re-autenticar al usuario.
+        usuario.reauthenticate(credential).addOnCompleteListener { task ->
+            // Manejar si el usuario se re-autentico exitosamente o no.
+            if (task.isSuccessful) {
+                // Si la re-autenticación es exitosa entonces enviamos un correo
+                // al nuevo correo que ingreso el usuario para confirmar que exista
+                // y que de verdad quiere cambiar.
+                usuario.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener { updateTask ->
+                    // Si el correo se mando correctamente entonces mostrar
+                    // un mensaje diciendo que verifique el correo que le mandamos
+                    // al NUEVO CORREO QUE EL INGRESO.
+                    if (updateTask.isSuccessful) {
+                        // Mostrar mensaje de exito.
+                        Toast.makeText(
+                            requireContext(),
+                            "Correo de verificación enviado. Por favor, verifica tu nuevo correo para completar el cambio.",
+                            Toast.LENGTH_SHORT
+                        ).show();
+
+                        // Llamamos la siguiente funcion para cambiar el correo
+                        // en firestore tambien.
+                        actualizarCorreoEnFirestore(usuario.uid, newEmail);
+
+                        // Cerramos sesion para que inicie sesion con el
+                        // nuevo correo.
+                        auth.signOut();
+
+                        // Llevamos al usuario al ActivitySignIn.kt ya que cambio
+                        // informacion importante asi que debe volver a iniciar sesion.
+                        val intent = Intent(requireContext(), ActivitySignIn::class.java);
+                        startActivity(intent);
+
+                        // Mostramos un mensaje para que vuelva a iniciar sesion.
+                        Toast.makeText(
+                            requireContext(),
+                            "Por favor vuevla a iniciar sesion con el nuevo correo.",
+                            Toast.LENGTH_SHORT
+                        ).show();
+                    } else {
+                        // Si el correo no se pudo enviar entonces mostrar
+                        // el siguiente mensaje.
+                        Toast.makeText(
+                            requireContext(),
+                            "Error al enviar correo de verificación.",
+                            Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                }
+            } else {
+                // Si el usuario no se re-autentico de manera
+                // correcta mostrar el siguiente mensaje.
+                Toast.makeText(
+                    requireContext(),
+                    "Error de autenticación. ${task.exception?.message}",
+                    Toast.LENGTH_SHORT
+                ).show();
+            }
+        }
+    }
+
+    private fun actualizarCorreoEnFirestore(userId: String, newEmail: String) {
+        // Declaramos una variable de base de datos para
+        // inicializar.
+        val db = FirebaseFirestore.getInstance();
+
+        // Obtenemos la direccion dentro de la coleccion
+        // users y el id del usuario en una variable.
+        val userRef = db.collection("users").document(userId);
+
+        userRef.update("correo", newEmail).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // No mostrar nada para no confundir al usuario.
+            } else {
+                // Si algo sale mal decirle que no se actualizo en Firestore.
+                Toast.makeText(
+                    requireContext(),
+                    "Error al actualizar correo en Firestore. ${task.exception?.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+
+    private fun revisarCamposVacios(): Boolean {
         // Revisar que los campos de contraseña no esten
         // vacios y retornamos true o false dependiendo
         // el caso.

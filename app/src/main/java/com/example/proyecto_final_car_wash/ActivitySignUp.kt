@@ -30,6 +30,9 @@ class ActivitySignUp : AppCompatActivity() {
     private lateinit var passwordEditText: TextInputEditText;
     private lateinit var imageViewSelection: ImageView;
 
+    // Variable para regresar a iniciar sesion.
+    private lateinit var iniciarSesionTextView: TextView;
+
     // Declarar las variables de las opciones de la foto.
     private lateinit var tomarFotoTextView: TextView;
     private lateinit var seleccionarFotoTextView: TextView;
@@ -100,6 +103,9 @@ class ActivitySignUp : AppCompatActivity() {
         correoEditText = findViewById(R.id.correoEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
 
+        // Obtenemos el valor de iniciar sesion para regresar.
+        iniciarSesionTextView = findViewById(R.id.iniciarSesionTextView);
+
         // Obtener el valor del boton registrar.
         registerButton = findViewById(R.id.registerButton);
 
@@ -112,6 +118,13 @@ class ActivitySignUp : AppCompatActivity() {
         // Manejamos el click del image view.
         imageViewSelection.setOnClickListener {
             mostrarModalOpciones();
+        }
+
+        // Manejamos el click de regresar al inicio de sesion.
+        iniciarSesionTextView.setOnClickListener {
+            // Redirigimos a ActivitySignIn.
+            val intent = Intent(this, ActivitySignIn::class.java);
+            startActivity(intent);
         }
 
         // Cuando se haga click en el boton registrar.
@@ -228,6 +241,38 @@ class ActivitySignUp : AppCompatActivity() {
         return true
     }
 
+    // Funcion para mandar un correo de verificacion al usuario.
+    private fun sendEmailVerification() {
+        // Declaramos una variable para obtener el usuario actual.
+        val usuario = auth.currentUser
+
+        // Verificamos que el usuario no sea nulo.
+        if (usuario !== null) {
+            // Continuamos y mandamos el correo de verificacion.
+            usuario.sendEmailVerification().addOnCompleteListener(this) { task ->
+                // Si la tarea fue satisfactoria continuar.
+                if (task.isSuccessful) {
+                    // Mandamos un mensaje de exito al usuario.
+                    Toast.makeText(
+                        this,
+                        "Se ha enviado un correo de verificación a ${usuario.email}. Por favor, revisa tu bandeja de entrada.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    // Si paso algo malo al crear la cuenta mandar un mensaje de error.
+                    Toast.makeText(
+                        this, "Hubo un error al crear la cuenta.", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }.addOnFailureListener(this) { exception ->
+                // Si al enviar el correo paso algo malo mostrarle al usuario.
+                Toast.makeText(
+                    this, "Hubo un error al mandar el correo.", Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
     // Funcion para registrar los usuarios.
     private fun registerUser(
         nombre: String,
@@ -241,6 +286,9 @@ class ActivitySignUp : AppCompatActivity() {
         // firbase auth.
         auth.createUserWithEmailAndPassword(correo, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                // Mandamos un correo de verificacion.
+                sendEmailVerification();
+
                 // Si salio bien entonces declaramos
                 // las siguientes variables.
                 val user = auth.currentUser;

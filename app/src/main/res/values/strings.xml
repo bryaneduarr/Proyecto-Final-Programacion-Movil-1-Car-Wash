@@ -15,8 +15,8 @@
     <string name="forgotPasswordTitle">Olvide Mi Contraseña</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="seguridadTitleTextView">Seguridad</string>
-    <string name="ingreseSuPasswordNuevo">Ingrese su contraseña actual</string>
-    <string name="ingreseSuPasswordActual">Ingrese su nueva contraseña</string>
+    <string name="ingreseSuPasswordNuevo">Ingrese su nueva contraseña</string>
+    <string name="ingreseSuPasswordActual">Ingrese su contraseña actual</string>
     <string name="cambiarPasswordTitle">Cambiar contraseña</string>
     <string name="eliminarCuentaTitle">Eliminar cuenta</string>
     <string name="apellidoTextField">Apellido</string>
@@ -25,4 +25,5 @@
     <string name="salvarCambiosButton">Salvar Cambios</string>
     <string name="telefonoTextField">Telefono</string>
     <string name="correo">Correo</string>
+    <string name="cambiarCorreoTextView">Cambiar Correo</string>
 </resources>
