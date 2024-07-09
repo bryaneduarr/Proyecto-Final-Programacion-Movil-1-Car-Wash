@@ -26,4 +26,5 @@
     <string name="telefonoTextField">Telefono</string>
     <string name="correo">Correo</string>
     <string name="cambiarCorreoTextView">Cambiar Correo</string>
+    <string name="solicitarcotizacion">Solicitar Cotización</string>
 </resources>
