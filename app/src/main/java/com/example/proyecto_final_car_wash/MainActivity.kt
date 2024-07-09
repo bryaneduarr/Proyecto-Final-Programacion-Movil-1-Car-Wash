@@ -55,6 +55,12 @@ class MainActivity : AppCompatActivity() {
             mostrarMenuPopup(it);
         }
 
+        binding.btnsCot.setOnClickListener {
+            val intent = Intent(this, ActivitySolicCotizacion::class.java);
+            startActivity(intent);
+            finish();
+        }
+
         // Revisamos que el user id no este
         // nulo para que nos lo acepte en el
         // document().
