@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity() {
             mostrarMenuPopup(it);
         }
 
-        binding.btnsCot.setOnClickListener {
+        // Accion cuando demos click a cotizar.
+        binding.cotizarButton.setOnClickListener {
             val intent = Intent(this, ActivitySolicCotizacion::class.java);
             startActivity(intent);
             finish();

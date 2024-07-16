@@ -27,4 +27,18 @@
     <string name="correo">Correo</string>
     <string name="cambiarCorreoTextView">Cambiar Correo</string>
     <string name="solicitarcotizacion">Solicitar Cotización</string>
+    <string name="historialButton">Historial</string>
+    <string name="cotizacionTextView">Cotice su lavado</string>
+    <string name="camionButton">Camion</string>
+    <string name="trailerButton">Trailer</string>
+    <string name="busButton">Bus</string>
+    <string name="camionetaButton">Camioneta</string>
+    <string name="turismoButton">Turismo</string>
+    <string name="confirmarButton">Confirmar</string>
+    <string name="seleccioneUnLavado">Seleccione un lavado</string>
+    <string name="seleccioneUnVehiculo">Seleccione un vehiculo</string>
+    <string name="seleccioneUnaFecha">Seleccione una fecha</string>
+    <string name="solicitarPedidoButton">Solicitar pedido</string>
+    <string name="seleccioneUnServicio">Seleccione un servicio</string>
+    <string name="totalPagar">Total: </string>
 </resources>
