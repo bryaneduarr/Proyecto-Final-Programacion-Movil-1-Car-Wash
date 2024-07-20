@@ -41,4 +41,12 @@
     <string name="solicitarPedidoButton">Solicitar pedido</string>
     <string name="seleccioneUnServicio">Seleccione un servicio</string>
     <string name="totalPagar">Total: </string>
+    <string name="historialTextView">Historial de servicios</string>
+    <string name="totalTextView">Total:</string>
+    <string name="servicioTextView">Servicio:</string>
+    <string name="fechaTextView">Fecha:</string>
+    <string name="confirmacionTextView">Confirmacion:</string>
+    <string name="numeroPedidoTextView">Numero de pedido:</string>
+    <string name="tipoLavadoTextView">Tipo de lavado:</string>
+    <string name="vehiculoPedidoTextView">Tipo de vehiculo:</string>
 </resources>
