@@ -12,6 +12,8 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
 
+        app:boxStrokeColor="#6482AD"
+        app:hintTextColor="#6482AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correoLayout"
@@ -31,9 +33,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="@string/cambiarPasswordTitle"
+        android:textColor="#333333"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/currentPasswordLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -42,8 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
+        android:background="#6482AD"
         android:text="@string/cambiarPasswordTitle"
-        android:textColor="@color/black"
+        android:textColor="#F5EDED"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="376dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="#6482AD"
 
+        app:hintTextColor="#6482AD"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:passwordToggleEnabled="true">
@@ -75,6 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
+        app:boxStrokeColor="#6482AD"
+        app:hintTextColor="#6482AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentPasswordLayout"
@@ -108,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/seguridadTitleTextView"
+        android:textColor="#333333"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,6 +143,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/cambiarCorreoTextView"
+        android:textColor="#333333"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/correoLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
@@ -144,8 +156,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="24dp"
+        android:background="#6482AD"
         android:text="@string/cambiarCorreoTextView"
-        android:textColor="@color/black"
+        android:textColor="#F5EDED"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.968"
@@ -158,8 +171,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="116dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="#6482AD"
 
+        app:hintTextColor="#6482AD"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

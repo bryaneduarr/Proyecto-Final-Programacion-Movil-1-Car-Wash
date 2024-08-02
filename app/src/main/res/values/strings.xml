@@ -49,4 +49,12 @@
     <string name="numeroPedidoTextView">Numero de pedido:</string>
     <string name="tipoLavadoTextView">Tipo de lavado:</string>
     <string name="vehiculoPedidoTextView">Tipo de vehiculo:</string>
+    <string name="regresarButton">Regresar</string>
+    <string name="continuarPedidoCotizacionButton">Continuar el pedido</string>
+    <string name="seleccionarDomicilioTextView">Seleccione su ubicacion</string>
+    <string name="finalizarPedidoButton">Finalizar pedido</string>
+    <string name="vehiculoTextView">"Vehiculo: "</string>
+    <string name="impuestoTextView">"Impuesto: "</string>
+    <string name="domicilioTextView">"Domicilio: "</string>
+    <string name="lavadoTextView">"Lavado: "</string>
 </resources>

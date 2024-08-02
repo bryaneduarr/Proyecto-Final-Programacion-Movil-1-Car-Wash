@@ -23,7 +23,7 @@
         android:layout_height="27dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@android:color/black"
+        android:textColor="#F5EDED"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/circuloButton"
@@ -32,16 +32,29 @@
         app:layout_constraintTop_toTopOf="@+id/circuloButton"
         tools:text="J" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="378dp"
+        android:layout_height="311dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
+        app:srcCompat="@drawable/logo2" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cotizarButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="4dp"
+        android:background="#6482AD"
         android:text="@string/solicitarcotizacion"
-        android:textColor="@color/black"
+        android:textColor="#F5EDED"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -50,24 +63,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
+        android:background="#6482AD"
         android:text="@string/historialButton"
-        android:textColor="@color/black"
+        android:textColor="#F5EDED"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cotizarButton" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="252dp"
-        android:layout_height="238dp"
-        android:layout_marginTop="24dp"
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textColor="#333333"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

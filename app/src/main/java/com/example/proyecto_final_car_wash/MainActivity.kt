@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var initialLetterTextView: TextView;
     private lateinit var binding: ActivityMainBinding;
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var welcomeTextView: TextView;
 
     // Declarar la variable para firebase.
     private lateinit var auth: FirebaseAuth;
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         // Obterner los datos de los campos del xml
         initialLetterTextView = findViewById(R.id.initialLetterTextView);
+        welcomeTextView = findViewById(R.id.welcomeTextView);
 
         // Inicializar firebase.
         auth = Firebase.auth;
@@ -101,6 +103,8 @@ class MainActivity : AppCompatActivity() {
                         val initial = nombre.first().uppercaseChar();
 
                         initialLetterTextView.text = initial.toString();
+
+                        welcomeTextView.text = "Bienvenido ${nombre}";
                     }
                 }
                 // Si hubo algun error entonces mostrar un
@@ -140,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                         // Decimos que si el campo de confirmacion es verdadero.
                         if (confirmacion == true) {
                             // Llamamos la funcion para mostrar una notificacion.
-                            sendNotification()
+                            // sendNotification()
 
                             // Mostramos un mensaje en la consola de exito.
                             Log.d("Notificacion", "Notificacion enviada.")

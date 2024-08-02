@@ -11,7 +11,7 @@
         android:id="@+id/regresarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="19dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="?attr/homeAsUpIndicator"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/cotizacionTextView"
+        android:textColor="#333333"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,11 +37,12 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="328dp"
+        app:boxStrokeColor="#6482AD"
+        app:hintTextColor="#6482AD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/cotizacionTextView">
 
         <AutoCompleteTextView
             android:id="@+id/vehiculoAutoCompleteTextView"
@@ -52,56 +54,39 @@
             android:textAlignment="viewStart" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lavadoTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="16dp"
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="480dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cotizacionTextView"
+        app:srcCompat="@drawable/logo3" />
 
-        android:layout_marginTop="36dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/solicitarPedidoButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="48dp"
+        android:background="#6482AD"
+        android:text="@string/solicitarPedidoButton"
+        android:textColor="#F5EDED"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vehiculoTextInputLayout">
-
-
-        <AutoCompleteTextView
-            android:id="@+id/lavadoAutoCompleteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/seleccioneUnLavado"
-            android:inputType="none"
-            android:padding="10dp"
-            android:textAlignment="viewStart" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/servicioTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="16dp"
-
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lavadoTextInputLayout">
-
-
-        <AutoCompleteTextView
-            android:id="@+id/servicioAutoCompleteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/seleccioneUnServicio"
-            android:inputType="none"
-            android:padding="10dp"
-            android:textAlignment="viewStart" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/fechaTextInputLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fechaTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
+        app:boxStrokeColor="#6482AD"
+        app:hintTextColor="#6482AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/servicioTextInputLayout">
@@ -118,39 +103,52 @@
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/solicitarPedidoButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/servicioTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="72dp"
-        android:text="@string/solicitarPedidoButton"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+
+        android:layout_marginTop="32dp"
+        app:boxStrokeColor="#6482AD"
+        app:hintTextColor="#6482AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalPagarNumbers" />
+        app:layout_constraintTop_toBottomOf="@+id/lavadoTextInputLayout">
 
-    <TextView
-        android:id="@+id/totalPagarTitle"
-        android:layout_width="71dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/totalPagar"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaTextInputLayout" />
 
-    <TextView
-        android:id="@+id/totalPagarNumbers"
-        android:layout_width="247dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="40dp"
-        android:textSize="20sp"
+        <AutoCompleteTextView
+            android:id="@+id/servicioAutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/seleccioneUnServicio"
+            android:inputType="none"
+            android:padding="10dp"
+            android:textAlignment="viewStart" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lavadoTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+
+        android:layout_marginTop="32dp"
+        app:boxStrokeColor="#6482AD"
+        app:hintTextColor="#6482AD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaTextInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/vehiculoTextInputLayout">
+
+
+        <AutoCompleteTextView
+            android:id="@+id/lavadoAutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/seleccioneUnLavado"
+            android:inputType="none"
+            android:padding="10dp"
+            android:textAlignment="viewStart" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

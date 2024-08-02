@@ -63,7 +63,7 @@ class ActivityForgotPassword : AppCompatActivity() {
                     if (it.isSuccessful) {
                         // Mostrar un mensaje de exito
                         // si salio bien.
-                        Toast.makeText(this, "Correo enviado.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Correo enviado, porfavor revise su correo.", Toast.LENGTH_SHORT).show();
 
                         // Llevar al usuario al ActivitySignIn.
                         val intent = Intent(this, ActivitySignIn::class.java);
