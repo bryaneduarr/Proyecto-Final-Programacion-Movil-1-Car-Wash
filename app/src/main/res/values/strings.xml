@@ -44,8 +44,8 @@
     <string name="historialTextView">Historial de servicios</string>
     <string name="totalTextView">Total:</string>
     <string name="servicioTextView">Servicio:</string>
-    <string name="fechaTextView">Fecha:</string>
-    <string name="confirmacionTextView">Confirmacion:</string>
+    <string name="fechaTextView">Fecha de entrega:</string>
+    <string name="confirmacionTextView"></string>
     <string name="numeroPedidoTextView">Numero de pedido:</string>
     <string name="tipoLavadoTextView">Tipo de lavado:</string>
     <string name="vehiculoPedidoTextView">Tipo de vehiculo:</string>
@@ -57,4 +57,7 @@
     <string name="impuestoTextView">"Impuesto: "</string>
     <string name="domicilioTextView">"Domicilio: "</string>
     <string name="lavadoTextView">"Lavado: "</string>
+    <string name="nombreVehiculoTextView">Nombre del vehiculo</string>
+    <string name="verUbicacionSeleccionadaButton">Ver ubicacion seleccionada</string>
+    <string name="ubicacionDeSuPedido">Ubicacion de su pedido</string>
 </resources>

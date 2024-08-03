@@ -52,6 +52,24 @@ class ActivityHistorial : AppCompatActivity() {
             fetchPedidos(userId);
         }
 
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedPedido = pedidosList[position];
+
+            val intent = Intent(this, ActivityDetallePedido::class.java).apply {
+                putExtra("vehiculo", selectedPedido.vehiculo);
+                putExtra("fecha", selectedPedido.fecha);
+                putExtra("lavado", selectedPedido.lavado);
+                putExtra("servicio", selectedPedido.servicio);
+                putExtra("total", selectedPedido.total);
+                putExtra("confirmacion", selectedPedido.confirmacion);
+                putExtra("numeroPedido", selectedPedido.numeroPedido);
+                putExtra("latitud", selectedPedido.latitud);
+                putExtra("longitud", selectedPedido.longitud);
+            }
+
+            startActivity(intent);
+        }
+
         // Manejamos el click de regresar al menu principal.
         regresarButton.setOnClickListener {
             // Redirigimos a MainActivity.kt.

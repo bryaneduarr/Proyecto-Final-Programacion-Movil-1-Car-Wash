@@ -50,6 +50,12 @@
         android:theme="@style/Theme.Proyecto_Final_Car_Wash"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityVerUbicacionPedido"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityDetallePedido"
+            android:exported="false" />
+        <activity
             android:name=".ActivityPedidoTotal"
             android:exported="false" />
         <activity

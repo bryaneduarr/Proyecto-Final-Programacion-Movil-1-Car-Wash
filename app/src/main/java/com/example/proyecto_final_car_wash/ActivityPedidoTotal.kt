@@ -48,8 +48,8 @@ class ActivityPedidoTotal : AppCompatActivity() {
         Log.d("Precio Servicio: ", precioServicio.toString());
 
 
-        binding.vehiculoPrecioTextView.text = "Lps. ${precioVehiculo}";
-        binding.lavadoPrecioTextView.text = "Lps. ${precioLavado}";
+        binding.vehiculoPrecioTextView.text = "Lps. ${precioVehiculo}    ${vehiculo}";
+        binding.lavadoPrecioTextView.text = "Lps. ${precioLavado}    ${lavado}";
         binding.servicioPrecioTextView.text = "Lps. ${precioServicio}";
         binding.impuestoPrecioTextView.text = "Lps. ${subTotal}"
         binding.totalPrecioTextView.text = "Lps. ${total + subTotal}";

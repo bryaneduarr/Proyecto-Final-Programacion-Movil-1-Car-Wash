@@ -7,5 +7,7 @@ data class Pedido(
     val total: Int = 0,
     val vehiculo: String = "",
     val servicio: String = "",
-    val confirmacion: Boolean = false
+    val confirmacion: Boolean = false,
+    val latitud: Double = 0.0,
+    val longitud: Double = 0.0
 );
