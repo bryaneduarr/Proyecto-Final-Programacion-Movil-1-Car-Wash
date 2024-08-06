@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                         // Decimos que si el campo de confirmacion es verdadero.
                         if (confirmacion == true) {
                             // Llamamos la funcion para mostrar una notificacion.
-                            // sendNotification()
+                            sendNotification()
 
                             // Mostramos un mensaje en la consola de exito.
                             Log.d("Notificacion", "Notificacion enviada.")
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
         // Declaramos la funcion de la notificacion con todos los metodos.
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_background).setContentTitle("Pedido verificado")
+            .setSmallIcon(R.drawable.logo).setContentTitle("Pedido verificado")
             .setContentText("Su pedido a sido verificado y estamos listos para el servicio.")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT).setAutoCancel(true)
             .setContentIntent(createPendingIntent());

@@ -58,12 +58,14 @@ class ActivityDetallePedido : AppCompatActivity() {
         val fecha = intent.getStringExtra("fecha");
         val lavado = intent.getStringExtra("lavado");
         val servicio = intent.getStringExtra("servicio");
-        val total = intent.getStringExtra("total");
+        val total = intent.getIntExtra("total", 0);
         val confirmacion = intent.getBooleanExtra("confirmacion", false);
         val numeroPedido = intent.getIntExtra("numeroPedido", -1);
 
         val latitud = intent.getDoubleExtra("latitud", 0.0);
         val longitud = intent.getDoubleExtra("longitud", 0.0);
+
+        Log.d("Total:", total.toString());
 
         if (servicio == "Domicilio") {
             verUbicacionSeleccionadaButton.visibility = View.VISIBLE;
@@ -113,7 +115,7 @@ class ActivityDetallePedido : AppCompatActivity() {
         fecha: String?,
         lavado: String?,
         servicio: String?,
-        total: String?,
+        total: Int?,
         confirmacion: Boolean,
     ) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid;
@@ -129,7 +131,7 @@ class ActivityDetallePedido : AppCompatActivity() {
                     val pedidos = document.get("pedidos") as? List<Map<String, Any>> ?: emptyList();
 
                     val pedido = pedidos.find {
-                        it["vehiculo"]?.toString() == vehiculo || it["fecha"]?.toString() == fecha || it["lavado"]?.toString() == lavado || it["servicio"]?.toString() == servicio || it["total"]?.toString() == total || it["confirmacion"]?.toString()
+                        it["vehiculo"]?.toString() == vehiculo || it["fecha"]?.toString() == fecha || it["lavado"]?.toString() == lavado || it["servicio"]?.toString() == servicio || it["total"]?.toString() == total.toString() || it["confirmacion"]?.toString()
                             ?.toBoolean() == confirmacion
                     }
 
@@ -138,7 +140,7 @@ class ActivityDetallePedido : AppCompatActivity() {
                         fechaTextView.text = pedido["fecha"] as? String;
                         lavadoTextView.text = pedido["lavado"] as? String;
                         servicioTextView.text = pedido["servicio"] as? String;
-                        totalTextView.text = "Lps. ${(pedido["total"] as? Long)?.toString()}.00";
+                        totalTextView.text = "Lps. ${pedido["total"].toString()}"
                         confirmacionTextView.text =
                             if (pedido["confirmacion"] as? Boolean == true) "Su pedido fue realizado con exito." else "Su pedido esta siendo lavado.";
 
